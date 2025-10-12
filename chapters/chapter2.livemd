@@ -427,7 +427,17 @@ Abaixo, temos um "esqueleto" da implementação. Os professores esperam que essa
 ```elixir
 defmodule AlgebraLinear do
   def soma_matrizes(matriz_a, matriz_b) do
-    # A fazer
+    # 1. Combina as linhas da matriz A com as linhas da matriz B
+    # Ex: [ [1, 2], [3, 4] ] e [ [5, 6], [7, 8] ]
+    # -> [ {[1, 2], [5, 6]}, {[3, 4], [7, 8]} ]
+    Enum.zip(matriz_a, matriz_b)
+    |> Enum.map(fn {linha_a, linha_b} ->
+      # 2. Para cada par de linhas, combina os elementos (colunas)
+      # Ex: [ {1, 5}, {2, 6} ]
+      Enum.zip(linha_a, linha_b)
+      # 3. Mapeia o par de elementos aplicando a soma
+      |> Enum.map(fn {a, b} -> a + b end)
+    end)
   end
 
   def subtrai_matrizes(matriz_a, matriz_b) do
