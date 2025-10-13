@@ -441,7 +441,13 @@ defmodule AlgebraLinear do
   end
 
   def subtrai_matrizes(matriz_a, matriz_b) do
-    # A fazer
+    # A estrutura é idêntica à soma, mas a operação final é a subtração.
+    Enum.zip(matriz_a, matriz_b)
+    |> Enum.map(fn {linha_a, linha_b} ->
+      Enum.zip(linha_a, linha_b)
+      # 3. Mapeia o par de elementos aplicando a subtração
+      |> Enum.map(fn {a, b} -> a - b end)
+    end)
   end
 
   def multiplica_matrizes(matriz_a, matriz_b) do
